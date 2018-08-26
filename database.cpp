@@ -4,6 +4,10 @@
 
 #include "database.h"
 
+std::ostream& operator<<(std::ostream& os, const Entry& entry) {
+    os << entry.date << " " << entry.event;
+}
+
 void Database::Add(const Date &date, const std::string &event) {
     // if there are already events for the given date
     if(storage.count(date)) {
@@ -25,6 +29,18 @@ void Database::Print(std::ostream &os) {
             cout << (*date_it).first << " " << (*event_it) << "\n";
        }
     }
+}
+
+string Database::Last(const Date &date) {
+    auto it = storage.upper_bound(date);
+
+    // if date is not smaller than other dates in the storage
+    if(it != storage.begin()) {
+        return (*prev(it)).first.ToString() + " " + (*prev(it)).second.back();
+    } else {
+        return "No entries";
+    }
+
 }
 
 

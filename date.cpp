@@ -36,6 +36,10 @@ int Date::GetDay() const {
     return day;
 }
 
+std::string Date::ToString() const {
+    return to_string(year) + "-" + to_string(month) + "-" + to_string(day);
+}
+
 Date ParseDate(std::istringstream &is) {
     string DATE;
     is >> DATE;

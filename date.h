@@ -21,6 +21,7 @@ public:
     int GetYear() const;
     int GetMonth() const;
     int GetDay() const;
+    std::string ToString() const;
 
 private:
     int year;

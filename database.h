@@ -11,16 +11,19 @@
 #include <iostream>
 #include <map>
 #include <algorithm>
+#include <string>
+#include <iostream>
+struct Entry {
+    Date date;
+    std::string event;
+};
 
+std::ostream& operator<<(std::ostream& os, const Entry& entry);
 
 class Database {
 public:
     void Add(const Date& date, const std::string& event);
     void Print(std::ostream& os);
-
-    int TestGetSize() {
-        return storage.size();
-    }
 
     template<typename L>
     int RemoveIf(const L predicate) {
@@ -57,12 +60,24 @@ public:
     }
 
     template<typename L>
-    std::vector<std::string> FindIf(const L predicate);
+    std::vector<Entry> FindIf(const L predicate) {
+        std::vector<Entry> output;
+        for(auto date_it = storage.begin(); date_it != storage.end(); date_it = std::next(date_it)) {
+            for(auto event_it = (*date_it).second.begin(); event_it != (*date_it).second.end(); event_it = next(event_it)) {
+                if(predicate((*date_it).first, (*event_it))) {
+                    output.push_back({(*date_it).first, (*event_it)});
+                }
+            }
+        }
+
+        return output;
+    }
+
 
     std::string Last(const Date& date);
 
 private:
-    map<Date, vector<string>> storage;
+    std::map<Date, std::vector<std::string>> storage;
 };
 
 

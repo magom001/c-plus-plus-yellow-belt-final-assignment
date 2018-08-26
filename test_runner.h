@@ -70,9 +70,7 @@ void AssertEqual(const T& t, const U& u,
     }
 }
 
-void Assert(bool b, const string& hint) {
-    AssertEqual(b, true, hint);
-}
+void Assert(bool b, const string& hint);
 
 class TestRunner {
 public:
@@ -87,12 +85,7 @@ public:
         }
     }
 
-    ~TestRunner() {
-        if (fail_count > 0) {
-            cerr << fail_count << " unit tests failed. Terminate" << endl;
-            exit(1);
-        }
-    }
+    ~TestRunner();
 
 private:
     int fail_count = 0;

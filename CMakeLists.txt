@@ -16,4 +16,4 @@ add_executable(c_plus_plus_yellow_final_assignment main.cpp
         database.h
         node.cpp
         node.h
-        )
+        condition_parser_test.cpp)
