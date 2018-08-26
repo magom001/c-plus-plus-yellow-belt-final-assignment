@@ -3,6 +3,8 @@
 #include <sstream>
 #include <vector>
 
+using namespace std;
+
 enum class TokenType {
     DATE,
     EVENT,

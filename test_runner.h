@@ -5,7 +5,6 @@
 #ifndef TEST_RUNNER_TEST_RUNNER_H
 #define TEST_RUNNER_TEST_RUNNER_H
 
-
 #include <sstream>
 #include <exception>
 #include <iostream>
@@ -13,6 +12,8 @@
 #include <map>
 #include <set>
 #include <vector>
+
+using namespace std;
 
 template <class T>
 std::ostream& operator << (std::ostream& os, const std::set<T>& s) {

@@ -10,6 +10,8 @@
 #include <string>
 #include <memory>
 
+using namespace std;
+
 enum class LogicalOperation {
     Or,
     And

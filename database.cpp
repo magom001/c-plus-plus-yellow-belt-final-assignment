@@ -23,15 +23,15 @@ void Database::Add(const Date &date, const std::string &event) {
     }
 }
 
-void Database::Print(std::ostream &os) {
+void Database::Print(std::ostream &os) const {
     for(auto date_it = storage.begin(); date_it != storage.end(); date_it = std::next(date_it)) {
        for(auto event_it = (*date_it).second.begin(); event_it != (*date_it).second.end(); event_it = std::next(event_it)) {
-            std::cout << (*date_it).first << " " << (*event_it) << "\n";
+            os << (*date_it).first << " " << (*event_it) << "\n";
        }
     }
 }
 
-std::string Database::Last(const Date &date) {
+std::string Database::Last(const Date &date) const {
     auto it = storage.upper_bound(date);
 
     // if date is not smaller than other dates in the storage

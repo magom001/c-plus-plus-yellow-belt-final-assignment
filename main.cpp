@@ -10,6 +10,8 @@
 #include <string>
 #include <algorithm>
 
+using namespace std;
+
 std::string ParseEvent(std::istream &is) {
     std::string event;
     std::getline(is, event);
