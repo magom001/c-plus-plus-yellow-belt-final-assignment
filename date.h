@@ -30,6 +30,12 @@ private:
 
 // определить сравнение для дат необходимо для использования их в качестве ключей словаря
 bool operator<(const Date& lhs, const Date& rhs);
+bool operator<=(const Date &lhs, const Date &rhs);
+bool operator==(const Date &lhs, const Date &rhs);
+bool operator!=(const Date &lhs, const Date &rhs);
+bool operator>(const Date &lhs, const Date &rhs);
+bool operator>=(const Date &lhs, const Date &rhs);
+
 
 // даты будут по умолчанию выводиться в нужном формате
 ostream& operator<<(ostream& stream, const Date& date);
