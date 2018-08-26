@@ -24,19 +24,19 @@ void Database::Add(const Date &date, const std::string &event) {
 }
 
 void Database::Print(std::ostream &os) {
-    for(auto date_it = storage.begin(); date_it != storage.end(); date_it = next(date_it)) {
-       for(auto event_it = (*date_it).second.begin(); event_it != (*date_it).second.end(); event_it = next(event_it)) {
-            cout << (*date_it).first << " " << (*event_it) << "\n";
+    for(auto date_it = storage.begin(); date_it != storage.end(); date_it = std::next(date_it)) {
+       for(auto event_it = (*date_it).second.begin(); event_it != (*date_it).second.end(); event_it = std::next(event_it)) {
+            std::cout << (*date_it).first << " " << (*event_it) << "\n";
        }
     }
 }
 
-string Database::Last(const Date &date) {
+std::string Database::Last(const Date &date) {
     auto it = storage.upper_bound(date);
 
     // if date is not smaller than other dates in the storage
     if(it != storage.begin()) {
-        return (*prev(it)).first.ToString() + " " + (*prev(it)).second.back();
+        return (*std::prev(it)).first.ToString() + " " + (*std::prev(it)).second.back();
     } else {
         return "No entries";
     }

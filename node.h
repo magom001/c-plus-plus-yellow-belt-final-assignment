@@ -10,9 +10,6 @@
 #include <string>
 #include <memory>
 
-
-using namespace std;
-
 enum class LogicalOperation {
     Or,
     And
@@ -42,8 +39,8 @@ public:
 class LogicalOperationNode : public Node{
 public:
     LogicalOperationNode(const LogicalOperation& logical_operation,
-            const shared_ptr<Node> node1,
-            const shared_ptr<Node> node2):
+            const std::shared_ptr<Node> node1,
+            const std::shared_ptr<Node> node2):
             logical_op_(logical_operation),
             node1_(node1),
             node2_(node2) {};
@@ -52,7 +49,7 @@ public:
 
 private:
     const LogicalOperation logical_op_;
-    shared_ptr<Node> node1_, node2_;
+    std::shared_ptr<Node> node1_, node2_;
 
 };
 
@@ -68,12 +65,12 @@ private:
 
 class EventComparisonNode : public Node {
 public:
-    EventComparisonNode(const Comparison& comp, const string& event): comparison_(comp), event_(event) {};
+    EventComparisonNode(const Comparison& comp, const std::string& event): comparison_(comp), event_(event) {};
     bool Evaluate(const Date &date, const std::string &event) override;
 
 private:
     const Comparison comparison_;
-    const string event_;
+    const std::string event_;
 };
 
 

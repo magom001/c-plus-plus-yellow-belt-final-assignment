@@ -11,8 +11,6 @@
 #include <iomanip>
 #include <vector>
 
-using namespace std;
-
 class Date {
 public:
     // конструктор выбрасывает исключение, если его аргументы некорректны
@@ -39,7 +37,7 @@ bool operator>=(const Date &lhs, const Date &rhs);
 
 
 // даты будут по умолчанию выводиться в нужном формате
-ostream& operator<<(ostream& stream, const Date& date);
+std::ostream& operator<<(std::ostream& stream, const Date& date);
 
 Date ParseDate(std::istringstream& is);
 

@@ -14,10 +14,8 @@
 #include <set>
 #include <vector>
 
-using namespace std;
-
 template <class T>
-ostream& operator << (ostream& os, const set<T>& s) {
+std::ostream& operator << (std::ostream& os, const std::set<T>& s) {
     os << "{";
     bool first = true;
     for (const auto& x : s) {
@@ -31,7 +29,7 @@ ostream& operator << (ostream& os, const set<T>& s) {
 }
 
 template<typename T>
-ostream& operator << (ostream& os, const vector<T>& v) {
+std::ostream& operator << (std::ostream& os, const std::vector<T>& v) {
     os << "{";
     bool first = true;
     for (const auto& x : v) {
@@ -45,7 +43,7 @@ ostream& operator << (ostream& os, const vector<T>& v) {
 }
 
 template <class K, class V>
-ostream& operator << (ostream& os, const map<K, V>& m) {
+std::ostream& operator << (std::ostream& os, const std::map<K, V>& m) {
     os << "{";
     bool first = true;
     for (const auto& kv : m) {
@@ -60,28 +58,28 @@ ostream& operator << (ostream& os, const map<K, V>& m) {
 
 template<class T, class U>
 void AssertEqual(const T& t, const U& u,
-                 const string& hint)
+                 const std::string& hint)
 {
     if (t != u) {
-        ostringstream os;
+        std::ostringstream os;
         os << "Assertion failed: " << t << " != " << u
            << " hint: " << hint;
-        throw runtime_error(os.str());
+        throw std::runtime_error(os.str());
     }
 }
 
-void Assert(bool b, const string& hint);
+void Assert(bool b, const std::string& hint);
 
 class TestRunner {
 public:
     template <class TestFunc>
-    void RunTest(TestFunc func, const string& test_name) {
+    void RunTest(TestFunc func, const std::string& test_name) {
         try {
             func();
-            cerr << test_name << " OK" << endl;
-        } catch (runtime_error& e) {
+            std::cerr << test_name << " OK" << std::endl;
+        } catch (std::runtime_error& e) {
             ++fail_count;
-            cerr << test_name << " fail: " << e.what() << endl;
+            std::cerr << test_name << " fail: " << e.what() << std::endl;
         }
     }
 
