@@ -13,6 +13,8 @@
 #include <algorithm>
 #include <string>
 #include <iostream>
+#include <utility>
+#include <set>
 
 using namespace std;
 
@@ -38,12 +40,14 @@ public:
         for(auto date_it = storage.begin(); date_it != storage.end();) {
 
             // for each date iterate over each event
-            for(auto event_it = (*date_it).second.begin(); event_it != (*date_it).second.end();) {
+            for(auto event_it = (*date_it).second.second.begin(); event_it != (*date_it).second.second.end();) {
 
                 // if predicate returns true for the date-event pair
-                if(predicate((*date_it).first, (*event_it))) {
-                    // remove event from the storage
-                    event_it = storage[(*date_it).first].erase(event_it);
+                if(predicate((*date_it).first, *(*event_it))) {
+                    // remove event from the set
+                    storage[(*date_it).first].first.erase(*(*event_it));
+                    // remove iterator to the deleted
+                    event_it = storage[(*date_it).first].second.erase(event_it);
 
                     // increase the count by 1
                     ++count;
@@ -53,7 +57,7 @@ public:
                 }
             }
             // if no more events for the given date, remove the date from storage
-            if((*date_it).second.size() == 0) {
+            if((*date_it).second.first.size() == 0) {
                 date_it = storage.erase(date_it);
             } else {
                 date_it = next(date_it);
@@ -67,9 +71,9 @@ public:
     std::vector<Entry> FindIf(const L predicate) const {
         std::vector<Entry> output;
         for(auto date_it = storage.begin(); date_it != storage.end(); date_it = std::next(date_it)) {
-            for(auto event_it = (*date_it).second.begin(); event_it != (*date_it).second.end(); event_it = next(event_it)) {
-                if(predicate((*date_it).first, (*event_it))) {
-                    output.push_back({(*date_it).first, (*event_it)});
+            for(auto event_it = (*date_it).second.second.begin(); event_it != (*date_it).second.second.end(); event_it = next(event_it)) {
+                if(predicate((*date_it).first, *(*event_it))) {
+                    output.push_back({(*date_it).first, *(*event_it)});
                 }
             }
         }
@@ -81,7 +85,7 @@ public:
     std::string Last(const Date& date) const;
 
 private:
-    std::map<Date, std::vector<std::string>> storage;
+    std::map<Date, std::pair<std::set<string>, std::vector<std::set<string>::iterator>>> storage;
 };
 
 

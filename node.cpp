@@ -22,8 +22,6 @@ bool DateComparisonNode::Evaluate(const Date &date, const std::string &event) {
             return date < date_;
         case Comparison::LessOrEqual:
             return date <= date_;
-        default:
-            return false;
     }
 }
 
@@ -41,8 +39,6 @@ bool EventComparisonNode::Evaluate(const Date &date, const std::string &event) {
             return event < event_;
         case Comparison::LessOrEqual:
             return event <= event_;
-        default:
-            return false;
     }
 }
 
@@ -52,7 +48,5 @@ bool LogicalOperationNode::Evaluate(const Date &date, const std::string &event) 
             return node1_->Evaluate(date, event) || node2_->Evaluate(date, event);
         case LogicalOperation::And:
             return node1_->Evaluate(date, event) && node2_->Evaluate(date, event);
-        default:
-            return false;
     }
 }
