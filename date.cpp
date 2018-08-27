@@ -37,7 +37,9 @@ int Date::GetDay() const {
 }
 
 std::string Date::ToString() const {
-    return std::to_string(year) + "-" + std::to_string(month) + "-" + std::to_string(day);
+    stringstream ss;
+    ss << *this;
+    return ss.str();
 }
 
 Date ParseDate(std::istream& is) {
